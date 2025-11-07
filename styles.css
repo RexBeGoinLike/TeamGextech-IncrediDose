@@ -98,7 +98,7 @@ nav {
 	font-weight: 600;
 }
 
-#searchresults-container div:nth-child(odd){
+#searchresults-container .card:nth-child(odd){
 	background-color: #EFEFEF;
 	
 }
@@ -112,8 +112,8 @@ nav {
 }
 
 #manageButton {
-	width:40%;
-	height: 150%;
+	width:60%;
+	height: 110%;
 	border-radius: 15px;
 	background: #3D3C3C;
 	color: #FFF;

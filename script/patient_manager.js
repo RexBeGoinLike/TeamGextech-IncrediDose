@@ -30,11 +30,33 @@ function generateSearchResults(patients){
      const container = document.createElement("div");
      container.className = "card";
 
-     const name = document.createElement("span");
-     name.textContent = patient.firstname;
+     const nameWrapper = document.createElement("div");
+     nameWrapper.style.display = "flex";
+     nameWrapper.style.flexDirection = "column";
 
-     const contactinfo = document.createElement("span");
-     contactinfo.textContent = patient.email;
+     const name = document.createElement("span");
+     name.textContent = patient.firstname + " " + patient.lastname;
+
+     const gender = document.createElement("span");
+     gender.textContent = patient.gender;
+     gender.style.fontSize = "13px"
+
+     nameWrapper.appendChild(name);
+     nameWrapper.appendChild(gender);
+
+     const contactWrapper = document.createElement("div");
+     contactWrapper.style.display = "flex";
+     contactWrapper.style.flexDirection = "column";
+
+     const email = document.createElement("span");
+     email.textContent = patient.email;
+
+     const contactnum = document.createElement("span");
+     contactnum.textContent = "+" + patient.contactnum;
+     contactnum.style.fontSize = "13px"
+
+     contactWrapper.appendChild(email);
+     contactWrapper.appendChild(contactnum);
 
      const lastactivity = document.createElement("span");
      lastactivity.textContent = patient.dateprescribed;
@@ -47,8 +69,8 @@ function generateSearchResults(patients){
       window.location.href = `prescription_manager.html?patientid=${patient.userid}&doctorid=41`;
      });
 
-     container.appendChild(name);
-     container.appendChild(contactinfo);
+     container.appendChild(nameWrapper);
+     container.appendChild(contactWrapper);
      container.appendChild(lastactivity);
      container.appendChild(manageButton);
 
