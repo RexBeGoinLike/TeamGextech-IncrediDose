@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-  phpDisplayAll(41); //Simulate Doctor Id. 41
+  phpOnLoad(41); //Simulate Doctor Id. 41
 });
 
-function phpDisplayAll(doctorid){
+function phpOnLoad(doctorid){
   fetch("includes/patient_manager.php?action=getPatients&doctorid=" + doctorid)
   .then(response => response.json())
   .then(data => {
@@ -38,31 +38,15 @@ function generateSearchResults(patients){
      const lastactivity = document.createElement("span");
      lastactivity.textContent = patient.dateprescribed;
 
-     const manageButton = document.createElement("button");
-     manageButton.textContent = "View Prescriptions";
-
-     manageButton.addEventListener("click", () => {
-      window.location.href = `prescription_manager.html?patientid=${patient.userid}`;
-     });
-
      container.appendChild(name);
      container.appendChild(contactinfo);
      container.appendChild(lastactivity);
-     container.appendChild(manageButton);
 
      parent.appendChild(container);
-
   });
 }
 
-const input = document.querySelector("input[name='search']");
-input.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      let val = input.value.trim();
-      if(val.length == 0){
-        phpDisplayAll(41);
-      }else{        
-        phpSearch(41, val);
-      }
-    }
+const button = document.getElementById("add");
+button.addEventListener("click", () => {
+   phpSearch(41, "Juan");
 });
