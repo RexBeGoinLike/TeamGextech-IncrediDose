@@ -13,6 +13,18 @@ function getPrescriptionItems($prescriptionid) {
     return $data;
 }
 
+function getPrescriptionItemsByName($prescriptionid, $prescriptionname) {
+    global $db;
+    $stmt = $db->prepare("SELECT * FROM PrescriptionItem WHERE prescriptionid = ? AND name = ?");
+    $stmt->execute([$prescriptionid, $prescriptionname]);
+    $result = $stmt->get_result();
+    $data = [];
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+    return $data;
+}
+
 function addPrescriptionItem($prescriptionid, $name, $brand, $quantity, $dosage, $frequency, $description, $substitutions) {
     global $db;
     $stmt = $db->prepare("INSERT INTO PRESCRIPTIONITEM (prescriptionid, name, brand, quantity, dosage, frequency, description, substitutions) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
@@ -41,6 +53,13 @@ switch ($action) {
         $prescriptionid = $_GET['prescriptionid'];
         header('Content-Type: application/json');
         echo json_encode(getPrescriptionItems($prescriptionid));
+        break;
+
+    case "getPrescriptionItemsByName":
+        $prescriptionid = $_GET['prescriptionid'];
+        $prescriptionname = $_GET['prescriptionname'];
+        header('Content-Type: application/json');
+        echo json_encode(getPrescriptionItemsByName($prescriptionid, $prescriptionname));
         break;
 
     case "addPrescriptionItem":

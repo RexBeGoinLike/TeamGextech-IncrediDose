@@ -21,7 +21,7 @@
 	<div id="operation-container">
 		<div id="prescriptionitemoperation-wrapper">
 			<a href = index.html><button>Back</button></a>
-			<input type="text" name="search" placeholder="Search Patient">	
+			<input type="text" name="search" placeholder="🔍︎ Search Medicine Name">	
 		</div>
 		<button id="add">Add</button>
 	</div>
@@ -35,36 +35,56 @@
 			<span>Dosage</span>
 			<span>Action</span>
 		</div>
-
-		<div class="card searchresult" data-label="Medicine Details">
-			<span class="medicine-name">Ibuprofen</span>
-			<span class="brand-name">Alaxan® FR</span>
-			<span class="quantity">10(20)</span>
-			<span class="dosage">400mg</span>
-			<span><button class="action-btn">⋮</button></span>
-		</div>
-
-		<div class="card searchresult" data-label="Medicine Details">
-			<span class="medicine-name">Acetaminophen</span>
-			<span class="generic">Generic</span>
-			<span class="quantity">10(10)</span>
-			<span class="dosage">400mg</span>
-			<span><button class="action-btn">⋮</button></span>
-		</div>
-
-		<div class="card searchresult" data-label="Medicine Details">
-			<span class="medicine-name">Fentanyl</span>
-			<span class="brand-name">Actiq® FR</span>
-			<span class="quantity">0(2)</span>
-			<span class="dosage">15mg</span>
-			<span><button class="action-btn">⋮</button></span>
-		</div>
-
 	</article>
 
-	<!-- Manage Button (Keep Hidden)-->
-	<div id="manage-container">
-		<button target="prescription_manager.html">Manage Prescription</button>
+
+
+	<!-- Add info for items (Keep Hidden) -->
+	<div id="exit">
+		
 	</div>
+	<div class="view-wrapper">
+		<div style="border-bottom: 2px solid #eaeaea;">
+			<span>Information</span>
+		</div>
+        <table class="list-wrapper">
+            <tr>
+                <td>
+                    <strong>Name</strong>
+                    <span id="name-value">Product Name</span>
+                </td>
+                <td>
+                    <strong>Brand</strong>
+                    <span id="brand-value">Product Brand</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Quantity</strong>
+                    <span id="qty-value">Product Quantity</span>
+                </td>
+                <td>
+                    <strong>Dosage</strong>
+                    <span id="dosage-value">Product Dosage</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Frequency</strong>
+                    <span id="frequency-value">Product Frequency</span>
+                </td>
+                <td>
+                    <strong>Substitutions</strong>
+                    <span id="substitutions-value">Product Substitutions</span>
+                </td>
+            </tr>
+        </table>
+        
+        <div class="description-section">
+            <strong>Description</strong>
+            <span id="description-value">Hola</span>
+        </div>
+    </div>
+
 </body>
 </html>

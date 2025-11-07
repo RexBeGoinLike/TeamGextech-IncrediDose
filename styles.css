@@ -36,9 +36,7 @@ nav {
 	height: 30px;
 }
 
-
 /* Operations Container */	
-
 #operation-container{
 	margin: 1.5rem 0 1rem 0;
 	display: flex;
@@ -79,7 +77,8 @@ nav {
 }
 
 #prescriptionitemoperation-wrapper{
-	width: 60%;
+	width: 80%;
+	gap: 20px;
 }
 
 
@@ -138,3 +137,31 @@ nav {
 	line-height: normal;
 }
 
+.description-section{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+table{
+	border-collapse: separate;  
+    border-spacing: 20px 10px;
+    margin-left: -20px;
+}
+
+.view-wrapper{
+	width: max-content;
+	height: max-content;
+	padding: 20px;
+	border-radius: 15px;
+	border: 1px solid #929191;
+	background: #FFF;
+	position: absolute;
+	visibility: hidden;
+}
+
+#exit{
+	width: 100vw;
+	height: 100vw;
+	position: fixed;
+}

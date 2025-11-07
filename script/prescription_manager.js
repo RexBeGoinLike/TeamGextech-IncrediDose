@@ -2,8 +2,6 @@ const params = new URLSearchParams(window.location.search);
 const doctorid = params.get("doctorid");
 const patientid = params.get("patientid");
 
-let patient;
-
 document.addEventListener("DOMContentLoaded", () => {
   phpDisplayAll(patientid);
   const addButton = document.querySelector("#add");
@@ -42,11 +40,9 @@ function generateSearchResults(prescriptions){
      date.textContent = `Issued on ${prescription.dateprescribed}`;
      date.style.fontWeight = "750";
 
-
      const email = document.createElement("span");
      email.textContent = prescription.email;
      email.style.fontSize = "13px";
-
 
      const contactnum = document.createElement("span");
      contactnum.textContent = "+" + prescription.contactnum;
