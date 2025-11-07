@@ -34,17 +34,26 @@
 		#logo-container img:last-child {
 			height: 30px;
 		}
+
+		
 		
 		/* Operations Container */	
+
+		#operation-container {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-around;
+		}
+
 		#operation-container input {
 			flex: 1;
-			padding: 12px 70px;
+			padding: 12px 40px;
 			border: 1px solid #ddd;
 			border-radius: 5px;
 			font-size: 1rem;
 			outline: none;
 			transition: border-color 0.3s;
-			margin-left: 6rem;
 		}
 		
 		#operation-container input:focus {
@@ -61,6 +70,7 @@
 			font-weight: 600;
 			transition: background-color 0.3s;
             float: right;
+			
 		}
 		
 		#operation-container button:hover {
