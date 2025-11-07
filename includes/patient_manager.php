@@ -14,7 +14,7 @@ function getPatients($doctorid) {
 	return $data;
 }
 
-function getPatientById($doctorid, $patientname) {
+function getPatientByName($doctorid, $patientname) {
 	global $db;
 	$stmt = $db->prepare("SELECT * from User INNER JOIN Prescription ON User.userid=Prescription.patientid WHERE Prescription.doctorid = ? AND (firstname = ? OR lastname = ?)");
     $stmt->execute([$doctorid, $patientname, $patientname]);
@@ -26,6 +26,17 @@ function getPatientById($doctorid, $patientname) {
 	return $data;
 }
 
+function getPatientById($patientid) {
+	global $db;
+	$stmt = $db->prepare("SELECT * from User where userid = ?");
+    $stmt->execute([$patientid]);
+    $result = $stmt->get_result();
+   	$data = [];
+    while ($row = $result->fetch_assoc()) {
+    	$data[] = $row;
+	}
+	return $data;
+}
 
 $action = $_GET['action'];
 
@@ -40,7 +51,14 @@ switch ($action) {
 		$doctorid = $_GET['doctorid'];
 		$patientname = $_GET['patientname'];
 		header('Content-Type: application/json');
-		echo json_encode(getPatientById($doctorid, $patientname));
+		echo json_encode(getPatientByName($doctorid, $patientname));
+		break;
+
+
+	case "getPatientById":
+		$patientid = $_GET['patientid'];
+		header('Content-Type: application/json');
+		echo json_encode(getPatientById($patientid));
 		break;
 }
 ?>

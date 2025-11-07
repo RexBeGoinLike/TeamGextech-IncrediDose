@@ -28,6 +28,7 @@ function generateSearchResults(patients){
   patients.forEach(patient => {
 
      const container = document.createElement("div");
+     container.className = "card";
 
      const name = document.createElement("span");
      name.textContent = patient.firstname;
@@ -39,10 +40,11 @@ function generateSearchResults(patients){
      lastactivity.textContent = patient.dateprescribed;
 
      const manageButton = document.createElement("button");
-     manageButton.textContent = "View Prescriptions";
+     manageButton.textContent = "Manage";
+     manageButton.setAttribute("id", "manageButton");
 
      manageButton.addEventListener("click", () => {
-      window.location.href = `prescription_manager.html?patientid=${patient.userid}`;
+      window.location.href = `prescription_manager.html?patientid=${patient.userid}&doctorid=41`;
      });
 
      container.appendChild(name);

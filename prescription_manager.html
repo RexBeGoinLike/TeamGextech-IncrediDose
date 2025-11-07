@@ -4,22 +4,21 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Manage Prescriptions</title>
-	<link rel="stylesheet" href="styles.css">
+	<script src="script/prescription_manager.js" defer></script>
 </head>
 <body>
 
 	<!-- Navigation -->
 	<nav>
 		<div id="logo-container">
-			<img src="res/logo-image.png">
-			<img src="res/logo-text.png">
+
 		</div>
 	</nav>
 
 	<!--  Operations  -->
 	<div id="operation-container">
-		<button>Back</button>
-		<button>Add</button>
+		<a href = index.html><button>Back</button></a>
+		<button id = "add">Add</button>
 	</div>
 
 	<!--  Search Results Container  -->
@@ -28,16 +27,6 @@
 			<span>Prescription</span>
 		</div>
 
-		<div class="card searchresult">
-
-		</div>
 	</article>
-
-	<!-- Manage Button (Keep Hidden)-->
-	<div>		
-		<button>View</button>
-		<button>Delete</button>
-	</div>
-
 </body>
 </html>

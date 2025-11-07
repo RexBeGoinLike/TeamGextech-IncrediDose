@@ -1,10 +1,10 @@
 <?php
 include("db.php");
 
-function getPrescriptions($doctorid, $patientid) {
+function getPrescriptions($patientid) {
 	global $db;
-    $stmt = $db->prepare("SELECT * from Prescription WHERE doctorid = ?");
-    $stmt->execute([$doctorid, $patientid]);
+    $stmt = $db->prepare("SELECT DISTINCT Prescription.*, User.email, User.contactnum from Prescription INNER JOIN User ON Prescription.patientid = User.userid WHERE patientid = ?");
+    $stmt->execute([$patientid]);
     $result = $stmt->get_result();
     $data = [];
     while ($row = $result->fetch_assoc()) {
@@ -23,14 +23,13 @@ function addPrescription($dateprescribed, $validperiod, $patientid, $doctorid) {
 $action = $_GET['action'];
 
 switch ($action) {
-	case "getUserById":
-		$doctorid = $_GET['doctorid'];
+	case "getPrescriptions":
 		$patientid = $_GET['patientid'];
 		header('Content-Type: application/json');
-		echo json_encode(getPatients($doctorid, $patientid));
+		echo json_encode(getPrescriptions($patientid));
 		break;
 
-	case "getUserById":
+	case "addPrescription":
 		$dateprescribed = $_GET['dateprescribed'];
 		$validperiod = $_GET['validperiod'];
 		$doctorid = $_GET['doctorid'];
