@@ -59,7 +59,7 @@ nav {
 	border-color: #3D3C3C;
 }
 
-#operation-container button {
+#operation-container button, #manageButton {
 	background-color: #3D3C3C;
 	color: white;
 	border: none;
@@ -72,7 +72,7 @@ nav {
 	transition: background-color 0.3s;
 }
 
-#operation-container button:hover {
+#operation-container button:hover, #manageButton:hover{
 	background-color: #929191;
 }
 
@@ -93,8 +93,8 @@ nav {
 
 .card {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-	gap: 150px;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1.25fr));
+	gap: 165px;
 	padding: 20px;
 	border-bottom: 1px solid #eaeaea;
 	align-items: center;
