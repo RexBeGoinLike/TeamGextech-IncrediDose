@@ -30,21 +30,31 @@ function generateSearchResults(prescriptions){
   prescriptions.forEach(prescription => {
      const container = document.createElement("div");
      container.className = "card";
+     container.style.display = "flex";
+     container.style.flexDirection = "row"
+     container.style.justifyContent = "space-between";
 
      const infoWrapper = document.createElement("div");
-     container.className = "infoWrapper";
+     infoWrapper.style.display = "flex";
+     infoWrapper.style.flexDirection = "column"
 
      const date = document.createElement("span");
      date.textContent = `Issued on ${prescription.dateprescribed}`;
+     date.style.fontWeight = "750";
+
 
      const email = document.createElement("span");
      email.textContent = prescription.email;
+     email.style.fontSize = "13px";
+
 
      const contactnum = document.createElement("span");
-     contactnum.textContent = prescription.contactnum;
+     contactnum.textContent = "+" + prescription.contactnum;
+     contactnum.style.fontSize = "13px";
 
      const manageButton = document.createElement("button");
      manageButton.textContent = "View";
+     manageButton.setAttribute("id", "manageButton");
 
      manageButton.addEventListener("click", () => {
       window.location.href = `prescriptionitem_manager.html?prescriptionid=${prescription.prescriptionid}`;
