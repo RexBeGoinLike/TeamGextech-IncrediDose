@@ -4,22 +4,21 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Home</title>
-	<link rel="stylesheet" href="styles.css">
+	<script src="script/patientsearch.js" defer></script>
 </head>
 <body>
 
 	<!-- Navigation -->
 	<nav>
 		<div id="logo-container">
-			<img src="res/logo-image.png">
-			<img src="res/logo-text.png">
+
 		</div>
 	</nav>
 
 	<!--  Operations  -->
 	<div id="operation-container">
 		<input type="text" name="search" placeholder="Search Patient">
-		<button>Add Patient</button>
+		<button id="add">Add Patient</button>
 	</div>
 
 	<!--  Search Results Container  -->
@@ -31,6 +30,7 @@
 			<span>Dosage</span>
 			<span>Action</span>
 		</div>
+<<<<<<< HEAD
 
 		<div class="card searchresult" data-label="Medicine Details">
 			<span class="medicine-name">Ibuprofen</span>
@@ -55,12 +55,13 @@
 			<span class="dosage">15mg</span>
 			<span><button class="action-btn">⋮</button></span>
 		</div>
+=======
+>>>>>>> 1de3a4c5955c8dfdbdeeda877f64576f8cbbd91a
 	</article>
 
 	<!-- Manage Button (Keep Hidden)-->
 	<div id="manage-container">
 		<button target="prescription_manager.html">Manage Prescription</button>
 	</div>
-
 </body>
 </html>
