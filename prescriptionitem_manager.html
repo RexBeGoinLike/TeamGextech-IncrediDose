@@ -3,8 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<meta ManagePrescriptionItems="viewport" content="width=device-width, initial-scale=1">
-	<title>Home</title>
+	<title>Manage Items</title>
 	<script src="script/prescriptionitem_manager.js" defer></script>
+	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -18,7 +19,10 @@
 
 	<!--  Operations  -->
 	<div id="operation-container">
-		<input type="text" name="search" placeholder="Search Patient">
+		<div id="prescriptionitemoperation-wrapper">
+			<a href = index.html><button>Back</button></a>
+			<input type="text" name="search" placeholder="Search Patient">	
+		</div>
 		<button id="add">Add</button>
 	</div>
 
