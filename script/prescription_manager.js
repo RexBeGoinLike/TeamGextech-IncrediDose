@@ -53,7 +53,7 @@ function generateSearchResults(prescriptions){
      manageButton.setAttribute("id", "manageButton");
 
      manageButton.addEventListener("click", () => {
-      window.location.href = `prescriptionitem_manager.html?prescriptionid=${prescription.prescriptionid}`;
+      window.location.href = `prescriptionitem_manager.html?patientid&=${prescription.patientid}prescriptionid=${prescription.prescriptionid}`;
      });
 
      infoWrapper.appendChild(date);

@@ -6,13 +6,90 @@ document.addEventListener("DOMContentLoaded", () => {
   phpDisplayAll(prescriptionid);
   const backButton = document.querySelector("#back");
   backButton.addEventListener("click", () => {
-      window.location.href = `prescription_manager.html?prescriptionid=${patientid}`;
+      window.location.href = `prescription_manager.html?patientid=21`;
   });
+
+  const addButton = document.querySelector("#add");
+  addButton.addEventListener("click", function(event) {
+	   const popup = document.getElementsByClassName("container");
+	   let rect = event.target.getBoundingClientRect();
+
+	   popup[0].style.left = (rect.left * .7) + window.scrollX + "px";
+	   popup[0].style.top = (rect.bottom * .9) + window.scrollY + "px";
+
+	   popup[0].style.visibility = "visible";
+  });
+
+
+
+  const form = document.querySelector('form');
+  const submitBtn = form.querySelector('.btn-primary');
+  const formFields = form.querySelectorAll('input, textarea');
+    
+  submitBtn.disabled = true;
+    
+  function validateForm() {
+        let isValid = true;
+        
+        formFields.forEach(field => {
+            if (field.type === 'checkbox') return;
+            
+            if (!field.value.trim()) {
+                isValid = false;
+            }
+        });
+        
+        submitBtn.disabled = !isValid;
+    }
+    
+    formFields.forEach(field => {
+        field.addEventListener('input', validateForm);
+    });
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Double-check validation before submitting
+        if (submitBtn.disabled) return;
+        
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Adding...';
+        
+        // Get form values
+        const name = document.getElementById('name').value;
+        const brand = document.getElementById('brand').value;
+        const quantity = document.getElementById('quantity').value;
+        const dosage = document.getElementById('dosage').value;
+        const frequency = document.getElementById('frequency').value;
+        const substitutions = document.getElementById('substitutions').checked ? '1' : '0';
+        const description = document.getElementById('description').value;
+        
+        // Send data to PHP using query string pattern
+        fetch(`includes/prescriptionitem_manager.php?action=addPrescriptionItem&prescriptionid=${encodeURIComponent(prescriptionid)}&name=${encodeURIComponent(name)}&brand=${encodeURIComponent(brand)}&quantity=${encodeURIComponent(quantity)}&dosage=${encodeURIComponent(dosage)}&frequency=${encodeURIComponent(frequency)}&substitutions=${encodeURIComponent(substitutions)}&description=${encodeURIComponent(description)}`)
+            .then(response => response.json())
+            .then(data => {
+                form.reset();
+
+                alert('Prescription item added successfully!');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while submitting the form');
+            })
+            .finally(() => {
+                submitBtn.textContent = 'Add';
+            });
+    });
+    
+    validateForm();
 });
 
 document.getElementById("exit").addEventListener("click", () => {
   const popup = document.getElementsByClassName("view-wrapper");
   popup[0].style.visibility = "hidden";
+
+  const popup2 = document.getElementsByClassName("container");
+  popup2[0].style.visibility = "hidden";
 })
 
 
