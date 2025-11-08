@@ -3,8 +3,7 @@ include("db.php");
 
 function getPatients($doctorid) {
 	global $db;
-    $stmt = $db->prepare("SELECT * from User INNER JOIN Prescription ON User.userid=Prescription.patientid 
-    	WHERE Prescription.doctorid = ?");
+    $stmt = $db->prepare("SELECT u.userid, u.firstname, u.lastname, u.email, u.contactnum, MAX(p.dateprescribed) AS dateprescribed FROM User u JOIN Prescription p ON u.userid = p.patientid WHERE p.doctorid = ? GROUP BY u.userid");
     $stmt->execute([$doctorid]);
     $result = $stmt->get_result();
     $data = [];
@@ -16,7 +15,7 @@ function getPatients($doctorid) {
 
 function getPatientByName($doctorid, $patientname) {
 	global $db;
-	$stmt = $db->prepare("SELECT * from User INNER JOIN Prescription ON User.userid=Prescription.patientid WHERE Prescription.doctorid = ? AND (firstname = ? OR lastname = ?)");
+	$stmt = $db->prepare("SELECT DISTINCT * from User INNER JOIN Prescription ON User.userid=Prescription.patientid WHERE Prescription.doctorid = ? AND (firstname = ? OR lastname = ?)");
     $stmt->execute([$doctorid, $patientname, $patientname]);
     $result = $stmt->get_result();
     $data = [];

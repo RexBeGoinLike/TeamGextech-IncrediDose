@@ -30,5 +30,73 @@
 		</div>
 
 	</article>
+
+	 <!-- Add form -->
+    <div class="container">
+        <div class="form-wrapper">
+            <div class="header" style="border-bottom: 2px solid #eaeaea;">
+                <h2>Add Prescription</h2>
+            </div>
+            
+            <form class="form-content">
+                <div class="form-grid">
+
+   					<div class="form-group">
+	                    <label for="date">Valid Period (For Prescription)*</label>
+	                    <input type="date" id="date" name="date">
+                    </div>
+
+                	<div class="form-row">
+    
+   						<div class="form-group">
+	                        <label for="name">Product Name*</label>
+	                        <input type="text" id="name" name="name">
+                    	</div>
+                    
+	                    <div class="form-group">
+	                        <label for="brand">Brand*</label>
+	                        <input type="text" id="brand" name="brand">
+	                    </div>
+
+                	</div>
+
+                	<div class="form-row">
+
+	                    <div class="form-group">
+	                        <label for="quantity">Quantity*</label>
+	                        <input type="number" min="1" id="quantity" name="quantity" value="1">
+	                    </div>
+	                    
+	                    <div class="form-group">
+	                        <label for="dosage">Dosage*</label>
+	                        <input type="text" id="dosage" name="dosage">
+	                    </div>
+
+                	</div>
+                    
+                	<div class="form-row">
+	                    <div class="form-group">
+	                        <label for="frequency">Frequency*</label>
+	                        <input type="number" min="1" id="frequency" name="frequency" value="1">
+	                    </div>
+	                    
+	                    <div class="form-group">
+	                        <label for="substitutions">Substitutions*</label>
+	                        <input type="checkbox" id="substitutions" name="substitutions">
+	                    </div>
+                	</div>
+                </div>
+                
+                <div class="description-section">
+                    <label for="description">Description*</label>
+                    <textarea id="description" name="description"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>    
 </body>
 </html>

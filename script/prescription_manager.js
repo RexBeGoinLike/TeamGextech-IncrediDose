@@ -6,8 +6,88 @@ document.addEventListener("DOMContentLoaded", () => {
   phpDisplayAll(patientid);
   const addButton = document.querySelector("#add");
   addButton.addEventListener("click", () => {
-      window.location.href = `prescriptionitem_manager.html?prescriptionid=${prescription.prescriptionid}&patientid=${patientid}`;
+     const popup = document.getElementsByClassName("container");
+     let rect = event.target.getBoundingClientRect();
+
+     popup[0].style.left = (rect.left * .7) + window.scrollX + "px";
+     popup[0].style.top = (rect.bottom * .9) + window.scrollY + "px";
+
+     popup[0].style.visibility = "visible";
   });
+
+  //Form validation
+  const form = document.querySelector('form');
+  const submitBtn = form.querySelector('.btn-primary');
+  const formFields = form.querySelectorAll('input, textarea');
+    
+  submitBtn.disabled = true;
+    
+  function validateForm() {
+        let isValid = true;
+        
+        formFields.forEach(field => {
+            if (field.type === 'checkbox') return;
+            
+            if (!field.value.trim()) {
+                isValid = false;
+            }
+        });
+        
+        submitBtn.disabled = !isValid;
+    }
+    
+    formFields.forEach(field => {
+        field.addEventListener('input', validateForm);
+    });
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (submitBtn.disabled) return;
+        
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Adding...';
+        
+        const value = document.getElementById('date').value;
+        let parts = value.split("/");
+        let date = parts[0];
+
+        fetch(`includes/prescription_manager.php?action=addPrescription&validperiod=${(date)}&doctorid=${doctorid}&patientid=${patientid}`)
+            .then(response => response.json())
+            .then(data => {
+
+              prescriptionid = data.id;
+          
+              const name = document.getElementById('name').value;
+              const brand = document.getElementById('brand').value;
+              const quantity = document.getElementById('quantity').value;
+              const dosage = document.getElementById('dosage').value;
+              const frequency = document.getElementById('frequency').value;
+              const substitutions = document.getElementById('substitutions').checked ? '1' : '0';
+              const description = document.getElementById('description').value;
+              
+
+              fetch(`includes/prescriptionitem_manager.php?action=addPrescriptionItem&prescriptionid=${encodeURIComponent(prescriptionid)}&name=${encodeURIComponent(name)}&brand=${encodeURIComponent(brand)}&quantity=${encodeURIComponent(quantity)}&dosage=${encodeURIComponent(dosage)}&frequency=${encodeURIComponent(frequency)}&substitutions=${encodeURIComponent(substitutions)}&description=${encodeURIComponent(description)}`)
+                  .then(response => response.json())
+                  .then(data => {
+                      form.reset();
+                      window.location.href = `prescriptionitem_manager.html?patientid&=${patientid}&prescriptionid=${prescriptionid}`;
+                  })
+                  .catch(error => {
+                      console.error('Error:', error);
+                      form.reset();
+                      alert('An error occurred while submitting the form');
+                  })
+                  .finally(() => {
+                      submitBtn.textContent = 'Add';
+                  });
+
+                  }).finally(() => {
+                      submitBtn.textContent = 'Add';
+                  });
+    });
+    
+    validateForm();
 });
 
 function phpDisplayAll(patientid){

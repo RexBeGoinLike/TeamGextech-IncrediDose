@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const backButton = document.querySelector("#back");
   backButton.addEventListener("click", () => {
-      window.location.href = `prescription_manager.html?patientid=21`;
+      window.location.href = `prescription_manager.html?patientid=${patientid}`;
   });
 
   const addButton = document.querySelector("#add");

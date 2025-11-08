@@ -13,10 +13,13 @@ function getPrescriptions($patientid) {
 	return $data;
 }
 
-function addPrescription($dateprescribed, $validperiod, $patientid, $doctorid) {
+function addPrescription($validperiod, $patientid, $doctorid) {
 	global $db;
-	$stmt = $db->prepare("INSERT INTO PRESCRIPTION (dateprescribed, validperiod, patientid, doctorid) VALUES (?, ?, ?, ?)");
-    $stmt-> execute([$dateprescribed, $validperiod, $patientid, $doctorid]);
+	$stmt = $db->prepare("INSERT INTO Prescription (validperiod, patientid, doctorid) VALUES (?, ?, ?)");
+    $stmt-> execute([$validperiod, $patientid, $doctorid]);
+    $id = $stmt->insert_id;
+    $data = ["id" => $id];
+	return $data;
 }
 
 
@@ -30,11 +33,10 @@ switch ($action) {
 		break;
 
 	case "addPrescription":
-		$dateprescribed = $_GET['dateprescribed'];
 		$validperiod = $_GET['validperiod'];
 		$doctorid = $_GET['doctorid'];
 		$patientid = $_GET['patientid'];
-		addPrescription($dateprescribed, $validperiod, $patientid, $doctorid);
+		echo json_encode(addPrescription($validperiod, $patientid, $doctorid));
 		break;
 }
 ?>
