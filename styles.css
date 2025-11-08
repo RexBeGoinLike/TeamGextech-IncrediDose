@@ -93,7 +93,7 @@ nav {
 
 .card {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(150px, 1.25fr));
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 	gap: 165px;
 	padding: 20px;
 	border-bottom: 1px solid #eaeaea;
@@ -149,14 +149,14 @@ table{
     margin-left: -20px;
 }
 
-.view-wrapper{
+.view-wrapper, .container{
 	width: max-content;
 	height: max-content;
 	padding: 20px;
 	border-radius: 15px;
 	border: 1px solid #929191;
 	background: #FFF;
-	position: absolute;
+	position: fixed;
 	visibility: hidden;
 }
 
@@ -164,4 +164,43 @@ table{
 	width: 100vw;
 	height: 100vw;
 	position: fixed;
+}
+
+.container{
+	position: fixed;
+	visibility: visible;
+}
+
+.form-row{
+	display: flex;
+	flex-direction: row;
+	gap: 20%;
+}
+
+.form-group{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.form-grid{
+	display: flex;
+	flex-direction: column;
+	gap: 20%;
+}
+
+.form-content input{
+	padding: 5px 5px;
+	border-radius: 10px;
+	border: 1px solid #929191;
+	background: #FFF;
+	font-size: 15px;
+	width: 100%;
+	outline: none;
+	transition: border-color 0.3s;
+}
+
+.form-content input[type="checkbox"]{
+	width: 100%;
 }

@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   phpDisplayAll(patientid);
   const addButton = document.querySelector("#add");
   addButton.addEventListener("click", () => {
-      window.location.href = `prescriptionitem_manager.html?prescriptionid=${prescription.prescriptionid}`;
+      window.location.href = `prescriptionitem_manager.html?prescriptionid=${prescription.prescriptionid}&patientid=${patientid}`;
   });
 });
 

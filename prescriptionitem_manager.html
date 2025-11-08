@@ -20,7 +20,7 @@
 	<!--  Operations  -->
 	<div id="operation-container">
 		<div id="prescriptionitemoperation-wrapper">
-			<a href = index.html><button>Back</button></a>
+			<button id="back">Back</button>
 			<input type="text" name="search" placeholder="🔍︎ Search Medicine Name">	
 		</div>
 		<button id="add">Add</button>
@@ -37,12 +37,10 @@
 		</div>
 	</article>
 
-
-
-	<!-- Add info for items (Keep Hidden) -->
+	<!-- Add forms for items (Keep Hidden) -->
 	<div id="exit">
-		
 	</div>
+
 	<div class="view-wrapper">
 		<div style="border-bottom: 2px solid #eaeaea;">
 			<span>Information</span>
@@ -85,6 +83,71 @@
             <span id="description-value">Hola</span>
         </div>
     </div>
+
+    <!-- Add form -->
+    <div class="container">
+        <div class="form-wrapper">
+            <div class="header" style="border-bottom: 2px solid #eaeaea;">
+                <h2>Presciption Item Information</h2>
+            </div>
+            <p>Add Medicine Details</p>
+            
+            <form class="form-content">
+                <div class="form-grid">
+                	<div class="form-row">
+    
+   						<div class="form-group">
+	                        <label for="name">Product Name</label>
+	                        <input type="text" id="name" name="name">
+                    	</div>
+                    
+	                    <div class="form-group">
+	                        <label for="brand">Brand</label>
+	                        <input type="text" id="brand" name="brand">
+	                    </div>
+
+                	</div>
+
+                	<div class="form-row">
+
+	                    <div class="form-group">
+	                        <label for="quantity">Quantity</label>
+	                        <input type="number" id="quantity" name="quantity">
+	                    </div>
+	                    
+	                    <div class="form-group">
+	                        <label for="dosage">Dosage</label>
+	                        <input type="text" id="dosage" name="dosage">
+	                    </div>
+
+                	</div>
+                    
+                	<div class="form-row">
+	                    <div class="form-group">
+	                        <label for="frequency">Frequency</label>
+	                        <input type="number" id="frequency" name="frequency">
+	                    </div>
+	                    
+	                    <div class="form-group">
+	                        <label for="substitutions">Substitutions</label>
+	                        <input type="checkbox" id="substitutions" name="substitutions">
+	                    </div>
+                	</div>
+                </div>
+                
+                <div class="description-section">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description">	
+                    </textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>    
 
 </body>
 </html>

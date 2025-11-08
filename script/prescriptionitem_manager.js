@@ -1,14 +1,20 @@
 const params = new URLSearchParams(window.location.search);
 const prescriptionid = params.get("prescriptionid");
+const patientid = params.get("patientid");
 
 document.addEventListener("DOMContentLoaded", () => {
   phpDisplayAll(prescriptionid);
+  const backButton = document.querySelector("#back");
+  backButton.addEventListener("click", () => {
+      window.location.href = `prescription_manager.html?prescriptionid=${patientid}`;
+  });
 });
 
 document.getElementById("exit").addEventListener("click", () => {
   const popup = document.getElementsByClassName("view-wrapper");
   popup[0].style.visibility = "hidden";
 })
+
 
 function phpDisplayAll(prescriptionid){
   fetch("includes/prescriptionitem_manager.php?action=getPrescriptionItems&prescriptionid=" + prescriptionid)
