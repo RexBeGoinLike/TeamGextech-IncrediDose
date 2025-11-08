@@ -1,9 +1,13 @@
 <?php
 include("db.php");
 
-function getPrescriptionItems($prescriptionid) {
+function getPrescriptionItems($prescriptionid, $sort) { //Sort: 0 = ASC, 1 = DESC
     global $db;
-    $stmt = $db->prepare("SELECT * FROM PrescriptionItem WHERE prescriptionid = ?");
+    if($sort == 0){
+        $stmt = $db->prepare("SELECT * FROM PrescriptionItem WHERE prescriptionid = ? ORDER BY name ASC");
+    }else{
+        $stmt = $db->prepare("SELECT * FROM PrescriptionItem WHERE prescriptionid = ? ORDER BY name DESC");
+    }
     $stmt->execute([$prescriptionid]);
     $result = $stmt->get_result();
     $data = [];
@@ -51,8 +55,9 @@ $action = $_GET['action'] ?? '';
 switch ($action) {
     case "getPrescriptionItems":
         $prescriptionid = $_GET['prescriptionid'];
+        $sort = $_GET['sort'];
         header('Content-Type: application/json');
-        echo json_encode(getPrescriptionItems($prescriptionid));
+        echo json_encode(getPrescriptionItems($prescriptionid, $sort));
         break;
 
     case "getPrescriptionItemsByName":

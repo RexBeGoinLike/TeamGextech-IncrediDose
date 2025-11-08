@@ -2,6 +2,9 @@ const params = new URLSearchParams(window.location.search);
 const prescriptionid = params.get("prescriptionid");
 const patientid = params.get("patientid");
 
+let sortVal = 0;
+
+//Buttons
 document.addEventListener("DOMContentLoaded", () => {
   phpDisplayAll(prescriptionid);
 
@@ -21,6 +24,21 @@ document.addEventListener("DOMContentLoaded", () => {
 	   popup[0].style.visibility = "visible";
   });
 
+
+  const sortButton = document.querySelector("#sort");
+  sortButton.addEventListener("click", (event) => {
+    if(sortVal == 0){
+      event.target.innerHTML = "Sort Desc ↓";
+      sortVal = 1;
+    }else{
+      event.target.innerHTML = "Sort Asc ↑";
+      sortVal = 0;
+    }
+    phpDisplayAll(prescriptionid);
+    
+  });
+
+  //Form validation
   const form = document.querySelector('form');
   const submitBtn = form.querySelector('.btn-primary');
   const formFields = form.querySelectorAll('input, textarea');
@@ -93,9 +111,9 @@ document.getElementById("exit").addEventListener("click", () => {
   form.reset();
 })
 
-
+//PHP Functions
 function phpDisplayAll(prescriptionid){
-  fetch("includes/prescriptionitem_manager.php?action=getPrescriptionItems&prescriptionid=" + prescriptionid)
+  fetch("includes/prescriptionitem_manager.php?action=getPrescriptionItems&prescriptionid=" + prescriptionid + "&sort=" + sortVal)
   .then(response => response.json())
   .then(data => {
       generateSearchResults(data);
@@ -103,13 +121,14 @@ function phpDisplayAll(prescriptionid){
 }
 
 function searchItem(prescriptionid, prescriptionname){
-  fetch("includes/prescriptionitem_manager.php?action=getPrescriptionItemsByName&prescriptionid=" + prescriptionid + "&prescriptionname=" + prescriptionname)
+  fetch("includes/prescriptionitem_manager.php?action=getPrescriptionItemsByName&prescriptionid=" + prescriptionid + "&prescriptionname=" + prescriptionname + "&sort=" + sortVal)
   .then(response => response.json())
   .then(data => {
       generateSearchResults(data);
   }).catch(error => console.error(error));
 }
 
+//Update Table
 function generateSearchResults(pitems){
   const parent = document.getElementById("searchresults-container");
 
@@ -171,6 +190,7 @@ function generateSearchResults(pitems){
   });
 }
 
+//Search Bar
 const input = document.querySelector("input[name='search']");
 input.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
