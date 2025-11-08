@@ -15,8 +15,8 @@ function getPatients($doctorid) {
 
 function getPatientByName($doctorid, $patientname) {
 	global $db;
-	$stmt = $db->prepare("SELECT DISTINCT * from User INNER JOIN Prescription ON User.userid=Prescription.patientid WHERE Prescription.doctorid = ? AND (firstname = ? OR lastname = ?)");
-    $stmt->execute([$doctorid, $patientname, $patientname]);
+	$stmt = $db->prepare("SELECT u.userid, u.firstname, u.lastname, u.email, u.contactnum, MAX(p.dateprescribed) AS dateprescribed FROM User u JOIN Prescription p ON u.userid = p.patientid WHERE p.doctorid = ? AND (u.firstname LIKE ? OR u.lastname LIKE ?) GROUP BY u.userid");
+    $stmt->execute([$doctorid, "%".$patientname."%", "%".$patientname."%"]);
     $result = $stmt->get_result();
     $data = [];
     while ($row = $result->fetch_assoc()) {

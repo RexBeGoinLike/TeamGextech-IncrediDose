@@ -19,8 +19,8 @@ function getPrescriptionItems($prescriptionid, $sort) { //Sort: 0 = ASC, 1 = DES
 
 function getPrescriptionItemsByName($prescriptionid, $prescriptionname) {
     global $db;
-    $stmt = $db->prepare("SELECT * FROM PrescriptionItem WHERE prescriptionid = ? AND name = ?");
-    $stmt->execute([$prescriptionid, $prescriptionname]);
+    $stmt = $db->prepare("SELECT * FROM PrescriptionItem WHERE prescriptionid = ? AND name LIKE ?");
+    $stmt->execute([$prescriptionid, "%".$prescriptionname."%"]);
     $result = $stmt->get_result();
     $data = [];
     while ($row = $result->fetch_assoc()) {

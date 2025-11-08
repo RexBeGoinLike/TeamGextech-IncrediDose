@@ -2,8 +2,18 @@ const params = new URLSearchParams(window.location.search);
 const doctorid = params.get("doctorid");
 const patientid = params.get("patientid");
 
+
+document.getElementById("exit").addEventListener("click", () => {
+  const popup = document.getElementsByClassName("container");
+  popup[0].style.visibility = "hidden";
+
+  const form = document.querySelector('form');
+  form.reset();
+});
+  
 document.addEventListener("DOMContentLoaded", () => {
   phpDisplayAll(patientid);
+
   const addButton = document.querySelector("#add");
   addButton.addEventListener("click", () => {
      const popup = document.getElementsByClassName("container");
