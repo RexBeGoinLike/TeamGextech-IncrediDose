@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 08, 2025 at 12:10 PM
+-- Generation Time: Nov 08, 2025 at 12:39 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.4.0
 
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `prescription` (
 --
 
 INSERT INTO `prescription` (`prescriptionid`, `dateprescribed`, `validperiod`, `patientid`, `doctorid`) VALUES
-(22, '2025-01-05 10:15:00', NULL, 21, 41),
+(22, '2025-01-05 10:15:00', '2025-01-30', 21, 41),
 (23, '2025-01-12 09:45:00', '2025-01-28', 22, 42),
 (24, '2025-02-03 14:20:00', '2025-02-18', 23, 43),
 (25, '2025-02-11 11:05:00', '2025-03-08', 24, 44),
