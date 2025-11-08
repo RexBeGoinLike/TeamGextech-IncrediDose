@@ -221,3 +221,8 @@ button[type=submit]{
 button[type=submit]:disabled{
 	background-color: #8a8888;
 }
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+}

@@ -4,6 +4,7 @@ const patientid = params.get("patientid");
 
 document.addEventListener("DOMContentLoaded", () => {
   phpDisplayAll(prescriptionid);
+
   const backButton = document.querySelector("#back");
   backButton.addEventListener("click", () => {
       window.location.href = `prescription_manager.html?patientid=21`;
@@ -19,8 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	   popup[0].style.visibility = "visible";
   });
-
-
 
   const form = document.querySelector('form');
   const submitBtn = form.querySelector('.btn-primary');
@@ -49,13 +48,12 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Double-check validation before submitting
         if (submitBtn.disabled) return;
         
         submitBtn.disabled = true;
         submitBtn.textContent = 'Adding...';
         
-        // Get form values
+
         const name = document.getElementById('name').value;
         const brand = document.getElementById('brand').value;
         const quantity = document.getElementById('quantity').value;
@@ -64,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const substitutions = document.getElementById('substitutions').checked ? '1' : '0';
         const description = document.getElementById('description').value;
         
-        // Send data to PHP using query string pattern
+
         fetch(`includes/prescriptionitem_manager.php?action=addPrescriptionItem&prescriptionid=${encodeURIComponent(prescriptionid)}&name=${encodeURIComponent(name)}&brand=${encodeURIComponent(brand)}&quantity=${encodeURIComponent(quantity)}&dosage=${encodeURIComponent(dosage)}&frequency=${encodeURIComponent(frequency)}&substitutions=${encodeURIComponent(substitutions)}&description=${encodeURIComponent(description)}`)
             .then(response => response.json())
             .then(data => {
@@ -90,6 +88,9 @@ document.getElementById("exit").addEventListener("click", () => {
 
   const popup2 = document.getElementsByClassName("container");
   popup2[0].style.visibility = "hidden";
+
+  const form = document.querySelector('form');
+  form.reset();
 })
 
 
