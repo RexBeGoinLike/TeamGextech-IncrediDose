@@ -4,4 +4,7 @@ FROM php:8.2-apache
 # Copy PHP code into Apache webroot
 COPY includes/ /var/www/html/
 
+# Install and enable mysqli
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+
 RUN chown -R www-data:www-data /var/www/html

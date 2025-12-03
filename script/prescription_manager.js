@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let parts = value.split("/");
         let date = parts[0];
 
-        fetch(`includes/prescription_manager.php?action=addPrescription&validperiod=${(date)}&doctorid=${doctorid}&patientid=${patientid}`)
+        fetch(`http://localhost:8080/prescription_manager.php?action=addPrescription&validperiod=${(date)}&doctorid=${doctorid}&patientid=${patientid}`)
             .then(response => response.json())
             .then(data => {
 
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
               const description = document.getElementById('description').value;
               
 
-              fetch(`includes/prescriptionitem_manager.php?action=addPrescriptionItem&prescriptionid=${encodeURIComponent(prescriptionid)}&name=${encodeURIComponent(name)}&brand=${encodeURIComponent(brand)}&quantity=${encodeURIComponent(quantity)}&dosage=${encodeURIComponent(dosage)}&frequency=${encodeURIComponent(frequency)}&substitutions=${encodeURIComponent(substitutions)}&description=${encodeURIComponent(description)}`)
+              fetch(`http://localhost:8080/prescriptionitem_manager.php?action=addPrescriptionItem&prescriptionid=${encodeURIComponent(prescriptionid)}&name=${encodeURIComponent(name)}&brand=${encodeURIComponent(brand)}&quantity=${encodeURIComponent(quantity)}&dosage=${encodeURIComponent(dosage)}&frequency=${encodeURIComponent(frequency)}&substitutions=${encodeURIComponent(substitutions)}&description=${encodeURIComponent(description)}`)
                   .then(response => response.json())
                   .then(data => {
                       form.reset();
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function phpDisplayAll(patientid){
-  fetch("includes/prescription_manager.php?action=getPrescriptions&patientid=" + patientid)
+  fetch("http://localhost:8080/prescription_manager.php?action=getPrescriptions&patientid=" + patientid)
   .then(response => response.json())
   .then(data => {
       generateSearchResults(data);

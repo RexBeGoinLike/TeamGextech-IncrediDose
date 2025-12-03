@@ -3,54 +3,58 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.nodejs
-    container_name: nodejs-app
+    container_name: nodejs-container
     ports:
       - "3000:3000"
     volumes:
       - ./node:/usr/src/app/node
       - ./package.json:/usr/src/app/package.json
     depends_on:
-      - mysql-db
+      - db
     environment:
-      - DB_HOST=mysql-db
-      - DB_USER=root
-      - DB_PASSWORD=123456
-      - DB_NAME=mydatabase
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: 123
+      DB_NAME: incredidose
+    restart: unless-stopped # Restart node js when host machine restarts
 
   apache-service:
     build:
       context: .
       dockerfile: Dockerfile.apache
-    container_name: php-apache
+    container_name: php-container
     ports:
       - "8080:80"
     volumes:
       - ./includes:/var/www/html
     depends_on:
-      - mysql-db
+      - db
+    restart: unless-stopped
 
-  mysql-db:
+  db:
     image: mysql:8.0
     container_name: mysql-container
     environment:
-      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: 123
       MYSQL_ROOT_HOST: "%" 
-      MYSQL_DATABASE: mydatabase
+      MYSQL_DATABASE: incredidose
     ports:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
+    restart: unless-stopped
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
     environment:
-      PMA_HOST: mysql-db       # the MySQL service name in Docker Compose
-      PMA_PORT: 3306           # MySQL default port inside container
+      PMA_HOST: db 
+      PMA_PORT: 3306     
     ports:
-      - "8081:80"              # expose phpMyAdmin on host port 8081
+      - "8081:80"
     depends_on:
-      - mysql-db
-      
+      - db
+    restart: unless-stopped
+
 volumes:
   mysql-data:

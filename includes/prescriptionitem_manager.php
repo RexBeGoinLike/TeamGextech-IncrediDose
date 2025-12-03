@@ -1,12 +1,16 @@
 <?php
 include("db.php");
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+
 function getPrescriptionItems($prescriptionid, $sort) { //Sort: 0 = ASC, 1 = DESC
     global $db;
     if($sort == 0){
-        $stmt = $db->prepare("SELECT * FROM PrescriptionItem WHERE prescriptionid = ? ORDER BY name ASC");
+        $stmt = $db->prepare("SELECT * FROM prescriptionitem WHERE prescriptionid = ? ORDER BY name ASC");
     }else{
-        $stmt = $db->prepare("SELECT * FROM PrescriptionItem WHERE prescriptionid = ? ORDER BY name DESC");
+        $stmt = $db->prepare("SELECT * FROM prescriptionitem WHERE prescriptionid = ? ORDER BY name DESC");
     }
     $stmt->execute([$prescriptionid]);
     $result = $stmt->get_result();
@@ -19,7 +23,7 @@ function getPrescriptionItems($prescriptionid, $sort) { //Sort: 0 = ASC, 1 = DES
 
 function getPrescriptionItemsByName($prescriptionid, $prescriptionname) {
     global $db;
-    $stmt = $db->prepare("SELECT * FROM PrescriptionItem WHERE prescriptionid = ? AND name LIKE ?");
+    $stmt = $db->prepare("SELECT * FROM prescriptionitem WHERE prescriptionid = ? AND name LIKE ?");
     $stmt->execute([$prescriptionid, "%".$prescriptionname."%"]);
     $result = $stmt->get_result();
     $data = [];
@@ -31,21 +35,21 @@ function getPrescriptionItemsByName($prescriptionid, $prescriptionname) {
 
 function addPrescriptionItem($prescriptionid, $name, $brand, $quantity, $dosage, $frequency, $description, $substitutions) {
     global $db;
-    $stmt = $db->prepare("INSERT INTO PRESCRIPTIONITEM (prescriptionid, name, brand, quantity, dosage, frequency, description, substitutions) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $db->prepare("INSERT INTO prescriptionitem (prescriptionid, name, brand, quantity, dosage, frequency, description, substitutions) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([$prescriptionid, $name, $brand, $quantity, $dosage, $frequency, $description, $substitutions]);
     return $stmt->insert_id;
 }
 
 function updatePrescriptionItem($prescriptionitemid, $name, $brand, $quantity, $dosage, $frequency, $description, $substitutions) {
     global $db;
-    $stmt = $db->prepare("UPDATE PRESCRIPTIONITEM SET name = ?, brand = ?, quantity = ?, dosage = ?, frequency = ?, description = ?, substitutions = ? WHERE prescriptionitemid = ?");
+    $stmt = $db->prepare("UPDATE prescriptionitem SET name = ?, brand = ?, quantity = ?, dosage = ?, frequency = ?, description = ?, substitutions = ? WHERE prescriptionitemid = ?");
     $stmt->execute([$name, $brand, $quantity, $dosage, $frequency, $description, $substitutions, $prescriptionitemid]);
     return $stmt->affected_rows;
 }
 
 function deletePrescriptionItem($prescriptionitemid) {
     global $db;
-    $stmt = $db->prepare("DELETE FROM PRESCRIPTIONITEM WHERE prescriptionitemid = ?");
+    $stmt = $db->prepare("DELETE FROM prescriptionitem WHERE prescriptionitemid = ?");
     $stmt->execute([$prescriptionitemid]);
     return $stmt->affected_rows;
 }

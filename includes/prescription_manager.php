@@ -1,9 +1,13 @@
 <?php
 include("db.php");
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+
 function getPrescriptions($patientid) {
 	global $db;
-    $stmt = $db->prepare("SELECT DISTINCT Prescription.*, User.email, User.contactnum from Prescription INNER JOIN User ON Prescription.patientid = User.userid WHERE patientid = ?");
+    $stmt = $db->prepare("SELECT DISTINCT prescription.*, user.email, user.contactnum from prescription INNER JOIN user ON prescription.patientid = user.userid WHERE patientid = ?");
     $stmt->execute([$patientid]);
     $result = $stmt->get_result();
     $data = [];
@@ -15,7 +19,7 @@ function getPrescriptions($patientid) {
 
 function addPrescription($validperiod, $patientid, $doctorid) {
 	global $db;
-	$stmt = $db->prepare("INSERT INTO Prescription (validperiod, patientid, doctorid) VALUES (?, ?, ?)");
+	$stmt = $db->prepare("INSERT INTO prescription (validperiod, patientid, doctorid) VALUES (?, ?, ?)");
     $stmt-> execute([$validperiod, $patientid, $doctorid]);
     $id = $stmt->insert_id;
     $data = ["id" => $id];

@@ -1,9 +1,13 @@
 <?php
 include("db.php");
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+
 function getPatients($doctorid) {
 	global $db;
-    $stmt = $db->prepare("SELECT u.userid, u.firstname, u.lastname, u.email, u.contactnum, MAX(p.dateprescribed) AS dateprescribed FROM User u JOIN Prescription p ON u.userid = p.patientid WHERE p.doctorid = ? GROUP BY u.userid");
+    $stmt = $db->prepare("SELECT u.userid, u.firstname, u.lastname, u.email, u.contactnum, MAX(p.dateprescribed) AS dateprescribed FROM user u JOIN prescription p ON u.userid = p.patientid WHERE p.doctorid = ? GROUP BY u.userid");
     $stmt->execute([$doctorid]);
     $result = $stmt->get_result();
     $data = [];
@@ -15,7 +19,7 @@ function getPatients($doctorid) {
 
 function getPatientByName($doctorid, $patientname) {
 	global $db;
-	$stmt = $db->prepare("SELECT u.userid, u.firstname, u.lastname, u.email, u.contactnum, MAX(p.dateprescribed) AS dateprescribed FROM User u JOIN Prescription p ON u.userid = p.patientid WHERE p.doctorid = ? AND (u.firstname LIKE ? OR u.lastname LIKE ?) GROUP BY u.userid");
+	$stmt = $db->prepare("SELECT u.userid, u.firstname, u.lastname, u.email, u.contactnum, MAX(p.dateprescribed) AS dateprescribed FROM user u JOIN prescription p ON u.userid = p.patientid WHERE p.doctorid = ? AND (u.firstname LIKE ? OR u.lastname LIKE ?) GROUP BY u.userid");
     $stmt->execute([$doctorid, "%".$patientname."%", "%".$patientname."%"]);
     $result = $stmt->get_result();
     $data = [];

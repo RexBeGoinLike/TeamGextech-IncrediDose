@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const description = document.getElementById('description').value;
         
 
-        fetch(`includes/prescriptionitem_manager.php?action=addPrescriptionItem&prescriptionid=${encodeURIComponent(prescriptionid)}&name=${encodeURIComponent(name)}&brand=${encodeURIComponent(brand)}&quantity=${encodeURIComponent(quantity)}&dosage=${encodeURIComponent(dosage)}&frequency=${encodeURIComponent(frequency)}&substitutions=${encodeURIComponent(substitutions)}&description=${encodeURIComponent(description)}`)
+        fetch(`http://localhost:8080/prescriptionitem_manager.php?action=addPrescriptionItem&prescriptionid=${encodeURIComponent(prescriptionid)}&name=${encodeURIComponent(name)}&brand=${encodeURIComponent(brand)}&quantity=${encodeURIComponent(quantity)}&dosage=${encodeURIComponent(dosage)}&frequency=${encodeURIComponent(frequency)}&substitutions=${encodeURIComponent(substitutions)}&description=${encodeURIComponent(description)}`)
             .then(response => response.json())
             .then(data => {
                 form.reset();
@@ -113,7 +113,7 @@ document.getElementById("exit").addEventListener("click", () => {
 
 //PHP Functions
 function phpDisplayAll(prescriptionid){
-  fetch("includes/prescriptionitem_manager.php?action=getPrescriptionItems&prescriptionid=" + prescriptionid + "&sort=" + sortVal)
+  fetch("http://localhost:8080/prescriptionitem_manager.php?action=getPrescriptionItems&prescriptionid=" + prescriptionid + "&sort=" + sortVal)
   .then(response => response.json())
   .then(data => {
       generateSearchResults(data);
@@ -121,7 +121,7 @@ function phpDisplayAll(prescriptionid){
 }
 
 function searchItem(prescriptionid, prescriptionname){
-  fetch("includes/prescriptionitem_manager.php?action=getPrescriptionItemsByName&prescriptionid=" + prescriptionid + "&prescriptionname=" + prescriptionname + "&sort=" + sortVal)
+  fetch("http://localhost:8080/prescriptionitem_manager.php?action=getPrescriptionItemsByName&prescriptionid=" + prescriptionid + "&prescriptionname=" + prescriptionname + "&sort=" + sortVal)
   .then(response => response.json())
   .then(data => {
       generateSearchResults(data);

@@ -12,7 +12,7 @@ function phpDisplayAll(doctorid){
 }
 
 function phpSearch(doctorid, patientName){
-  fetch("includes/patient_manager.php?action=getPatientByName&doctorid=" + doctorid + "&patientname=" + patientName)
+  fetch("http://localhost:8080/patient_manager.php?action=getPatientByName&doctorid=" + doctorid + "&patientname=" + patientName)
   .then(response => response.json())
   .then(data => {
       generateSearchResults(data);
