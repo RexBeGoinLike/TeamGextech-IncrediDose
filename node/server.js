@@ -5,10 +5,11 @@ const cors = require('cors');
 app.use(cors());
 
 let con = mysql.createConnection({
-  host: "localhost",
+  host: "mysql-db",
   user: "root",
   password: "",
-  database: "312-TeamGextech-mid"
+  database: "mydatabase",
+  port: 3306
 });
 
 app.get('/getpatients', (req, res) => {

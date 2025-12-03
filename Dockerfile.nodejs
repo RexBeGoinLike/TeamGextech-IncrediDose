@@ -1,0 +1,22 @@
+FROM node:20
+
+# Set working directory inside container
+WORKDIR /usr/src/app
+
+# Copy package.json from root
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy Node.js code from node/ folder
+COPY node/ ./node/
+
+# Set working directory to node folder
+WORKDIR /usr/src/app/node
+
+# Expose port
+EXPOSE 3000
+
+# Start server
+CMD ["node", "server.js"]

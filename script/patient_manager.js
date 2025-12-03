@@ -2,8 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
   phpDisplayAll(41); //Simulate Doctor Id. 41
 });
 
+//NODE TO
 function phpDisplayAll(doctorid){
-  fetch("includes/patient_manager.php?action=getPatients&doctorid=" + doctorid)
+  fetch("http://localhost:3000/getpatients?id=" + doctorid)
   .then(response => response.json())
   .then(data => {
       generateSearchResults(data);

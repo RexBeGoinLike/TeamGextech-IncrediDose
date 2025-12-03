@@ -1,0 +1,7 @@
+# Dockerfile.apache
+FROM php:8.2-apache
+
+# Copy PHP code into Apache webroot
+COPY includes/ /var/www/html/
+
+RUN chown -R www-data:www-data /var/www/html
