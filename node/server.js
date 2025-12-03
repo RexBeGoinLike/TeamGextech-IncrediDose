@@ -7,7 +7,7 @@ app.use(cors());
 let con = mysql.createConnection({
   host: "mysql-db",
   user: "root",
-  password: "",
+  password: "123456",
   database: "mydatabase",
   port: 3306
 });
@@ -15,7 +15,7 @@ let con = mysql.createConnection({
 app.get('/getpatients', (req, res) => {
     const id = req.query.id;
     con.query(
-        'SELECT u.userid, u.firstname, u.lastname, u.email, u.contactnum, MAX(p.dateprescribed) AS dateprescribed FROM User u JOIN Prescription p ON u.userid = p.patientid WHERE p.doctorid = ? GROUP BY u.userid',
+        'SELECT u.userid, u.firstname, u.lastname, u.email, u.contactnum, MAX(p.dateprescribed) AS dateprescribed FROM user u JOIN prescription p ON u.userid = p.patientid WHERE p.doctorid = ? GROUP BY u.userid',
         [id],                      
         (err, results) => {
             if (err) return res.status(500).json({ error: err });

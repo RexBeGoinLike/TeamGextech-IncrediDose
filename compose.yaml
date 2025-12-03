@@ -41,5 +41,16 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mysql-db       # the MySQL service name in Docker Compose
+      PMA_PORT: 3306           # MySQL default port inside container
+    ports:
+      - "8081:80"              # expose phpMyAdmin on host port 8081
+    depends_on:
+      - mysql-db
+      
 volumes:
   mysql-data:

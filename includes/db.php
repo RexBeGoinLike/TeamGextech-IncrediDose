@@ -1,7 +1,7 @@
 <?php
     $dbserver = "mysql-db";
     $dbuser = "root";
-    $dbpass = "";
+    $dbpass = "123456";
     $dbname = "mydatabase";
     $port = 3306;
 
