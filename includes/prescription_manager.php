@@ -7,7 +7,8 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 function getPrescriptions($patientid) {
 	global $db;
-    $stmt = $db->prepare("SELECT DISTINCT prescription.*, user.email, user.contactnum from prescription INNER JOIN user ON prescription.patientid = user.userid WHERE patientid = ?");
+    $stmt = $db->prepare("SELECT DISTINCT prescription.*, user.email, user.contactnum from prescription 
+	INNER JOIN user ON prescription.patientid = user.userid WHERE patientid = ?");
     $stmt->execute([$patientid]);
     $result = $stmt->get_result();
     $data = [];
